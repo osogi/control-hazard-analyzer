@@ -18,15 +18,18 @@ from src.helpers.backGroundBuilder import CSignal
 class SshCollector:
     def __init__(self, settings: Namespace, bin_dir: Path | None = None):
         self.settings = settings
-        self.max_test_launches = settings.__dict__.get("max_test_launches", -1)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(self.settings.log_level)
         self.is_tmp_created = False
 
-        self.host = settings.__dict__.get("host", "127.0.0.1")
-        self.user = settings.__dict__.get("username", "root")
-        self.path_to_key = settings.__dict__.get("path_to_key", "~/.ssh/id_rsa")
-        self.password = settings.__dict__.get("password", "toor")
+        set_dict = vars(settings)
+        self.max_test_launches = set_dict.get("max_test_launches", -1)
+        self.cpu = set_dict.get("cpu", 0)
+
+        self.host = set_dict.get("host", "127.0.0.1")
+        self.user = set_dict.get("username", "root")
+        self.path_to_key = set_dict.get("path_to_key", "~/.ssh/id_rsa")
+        self.password = set_dict.get("password", "toor")
 
         self.open()
 
@@ -129,7 +132,7 @@ class SshCollector:
             )
         return (chan.recv(1024), is_full)
 
-    def get_stat(self, binary: Path, number_executes: int, cpu_core: int = 0) -> List[TestRes]:
+    def get_stat(self, binary: Path, number_executes: int, cpu_core: int) -> List[TestRes]:
         stats: List[TestRes] = []
         execute_line = list(map(str, [binary, cpu_core]))
         execute_string = " ".join(map(str, execute_line))
@@ -181,7 +184,7 @@ class SshCollector:
                     host_binary = self.bin_dir.joinpath(binary.name)
                     self.send_binary(binary, host_binary)
                     self.update_capabilities(host_binary)
-                    data = self.get_stat(host_binary, self.max_test_launches)
+                    data = self.get_stat(host_binary, self.max_test_launches, self.cpu)
                     analyzed[host_binary.name.split(".")[0]] = data
                 case _:
                     raise Exception(f"Get unexpected channel signal {sign}")
