@@ -176,7 +176,7 @@ class Generator:
         self,
         scope: Scope,
         probs: Probabilities,
-        random_seed: int | None = 42,
+        random_seed: int | None,
         **kwargs: Dict[str, int],
     ) -> None:
         self.probs = probs
@@ -262,7 +262,7 @@ def gen_test(
     if cond_operators is None:
         cond_operators = ["<", "<=", ">", ">=", "==", "!="]
 
-    seed = rd.randint(1, 1000)
+    seed = rd.randint(0, 0x10000000)
 
     probs = Probabilities(
         blocks_chanses={
