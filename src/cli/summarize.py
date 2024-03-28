@@ -56,11 +56,11 @@ class Summarize:
         )
         self.construct_plot(clean_df_plot, data_frame_plot.loc[:, ["BP lookups", "Full launch"]])
 
-        if not self.settings.no_show_graph:
-            self.show_plot()
-
         if not self.settings.no_save_graph:
             self.save_plot(out_dir)
+
+        if not self.settings.no_show_graph:
+            self.show_plot()
 
     def get_data_from_sources(self, src_dirs: List[Path]) -> DataType[int]:
         data: Dict[str, Dict[str, DictSI]] = {}
