@@ -18,7 +18,12 @@ class SshAnalyzer:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(self.settings.log_level)
 
-        self.base: Analyzer = BGBuildAnalyzer(PerfPatcher(settings), self.builder, SshCollector(settings), settings)
+        self.collector: SshCollector = SshCollector(settings)
+        self.base: Analyzer = BGBuildAnalyzer(PerfPatcher(settings), self.builder, self.collector, settings)
 
     def analyze(self, test_dir: Path) -> Dict[str, Dict]:
         return self.base.analyze(test_dir)
+
+    def fin(self) -> None:
+        self.collector.fin()
+        return self.base.fin()

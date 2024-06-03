@@ -3,6 +3,9 @@
 
 #ifndef EVENTS_INIT
     #define EVENTS_INIT
+
+    #define EVENTS_EXCLUDE_KERNEL 1
+    #define EVENTS_EXCLUDE_HV     1
 typedef struct _perf_event_config_t {
     unsigned int type;
     unsigned long long config;

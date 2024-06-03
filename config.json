@@ -2,10 +2,24 @@
   "DEFAULT": {
     "path_to_configs": "./configs",
     "configs": [
-      "perf.json",
-      "gem5-BiMode.json",
-      "gem5-Tournament.json"
+      "perf.json"
     ],
     "dest_dir": "out"
+  },
+    "gem5": {
+    "path_to_configs": "./configs/gem5",
+    "configs": [
+      "gem5-BiModeBP.json",
+      "gem5-LTAGE.json",
+      "gem5-LocalBP.json",
+      "gem5-MultiperspectivePerceptron64KB.json",
+      "gem5-MultiperspectivePerceptron8KB.json",
+      "gem5-MultiperspectivePerceptronTAGE64KB.json",
+      "gem5-MultiperspectivePerceptronTAGE8KB.json",
+      "gem5-TAGE.json",
+      "gem5-TAGE_SC_L_64KB.json",
+      "gem5-TournamentBP.json"
+    ],
+    "dest_dir": "out-gem5"
   }
 }

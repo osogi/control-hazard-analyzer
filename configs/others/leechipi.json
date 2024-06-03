@@ -1,0 +1,8 @@
+{
+    "profiler": "perf",
+    "out_dir": "analyze",
+    "compiler": "riscv64-linux-gnu-gcc",
+
+    "timeout": 10,
+    "max_test_launches": 50
+}

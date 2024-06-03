@@ -52,6 +52,7 @@ class Analyze:
             return
         self.create_empty_dir(self.analyze_dir)
         data = self.analyze(self.test_dir)
+        self.fin_analyzer()
         self.pack(self.analyze_dir, data)
 
     def create_empty_dir(self, dir_path: Path) -> None:
@@ -65,6 +66,10 @@ class Analyze:
             self.logger.warn("Analyzer is not provided.")
             return {}
         return self.analyzer.analyze(test_dir)
+
+    def fin_analyzer(self) -> None:
+        if self.analyzer is not None:
+            self.analyzer.fin()
 
     def pack(self, analyze_dir: Path, analyzed_data: Dict[str, DictSI]) -> None:
         print(f"[+]: Save analysis' results to {analyze_dir.absolute().as_posix()}")

@@ -1,0 +1,9 @@
+{
+    "profiler": "perf",
+    "out_dir": "analyze",
+    "compiler": "aarch64-linux-gnu-gcc-9",
+    "events": "cortex-a72.c",
+
+    "timeout": 10,
+    "max_test_launches": 50
+}

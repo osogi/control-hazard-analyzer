@@ -24,7 +24,7 @@ class BGBuildAnalyzer:
 
         self.temp_dir: Path = Path(mkdtemp())
 
-    def __del__(self):
+    def fin(self):
         shutil.rmtree(self.temp_dir)
 
     def analyze(self, test_dir: Path) -> Dict[str, Dict]:

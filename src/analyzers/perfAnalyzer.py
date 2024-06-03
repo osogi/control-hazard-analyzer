@@ -24,3 +24,6 @@ class PerfAnalyzer:
 
     def analyze(self, test_dir: Path) -> Dict[str, DictSI]:
         return self.base.analyze(test_dir)
+
+    def fin(self) -> None:
+        return self.base.fin()

@@ -1,0 +1,7 @@
+{
+  "profiler": "gem5",
+  "target_isa": "X86",
+  "gem5_home": "/path/to/your/gem5/dir",
+  "sim_script_args": "--cpu-type=O3CPU --bp-type=MultiperspectivePerceptron8KB --caches -c {{GEM5_TARGET_BINARY}}",
+  "timeout": 50
+}

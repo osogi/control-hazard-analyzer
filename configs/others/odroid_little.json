@@ -1,0 +1,9 @@
+{
+    "profiler": "perf",
+    "out_dir": "analyze",
+    "compiler": "arm-linux-gnueabihf-gcc",
+    "cpu": 0,
+
+    "timeout": 10,
+    "max_test_launches": 50
+}

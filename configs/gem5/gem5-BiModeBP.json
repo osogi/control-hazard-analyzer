@@ -3,5 +3,5 @@
   "target_isa": "X86",
   "gem5_home": "/path/to/your/gem5/dir",
   "sim_script_args": "--cpu-type=O3CPU --bp-type=BiModeBP --caches -c {{GEM5_TARGET_BINARY}}",
-  "timeout": 3
+  "timeout": 50
 }

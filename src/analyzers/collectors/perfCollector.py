@@ -17,9 +17,12 @@ from src.protocols.collector import DictSI
 class PerfCollector:
     def __init__(self, settings: Namespace):
         self.settings = settings
-        self.max_test_launches = settings.__dict__.get("max_test_launches", -1)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(self.settings.log_level)
+
+        set_dict = vars(settings)
+        self.max_test_launches = set_dict.get("max_test_launches", -1)
+        self.cpu = set_dict.get("cpu", 0)
 
     def tab_lines(self, lines: str) -> str:
         return "\t" + lines.replace("\n", "\n\t")[:-1]
@@ -57,7 +60,7 @@ class PerfCollector:
             res = proc.stdout.read()
         return (res, is_full)
 
-    def get_stat(self, binary: Path, number_executes: int, cpu_core: int = 0) -> List[TestRes]:
+    def get_stat(self, binary: Path, number_executes: int, cpu_core: int) -> List[TestRes]:
         stats: List[TestRes] = []
         execute_line = list(map(str, [binary, cpu_core]))
         execute_string = " ".join(map(str, execute_line))
@@ -74,7 +77,7 @@ class PerfCollector:
     def get_stats_dir(self, target_dir: Path) -> Dict[str, List[TestRes]]:
         output_dict: Dict[str, List[TestRes]] = {}
         for binary in target_dir.iterdir():
-            data = self.get_stat(target_dir.joinpath(binary), self.max_test_launches)
+            data = self.get_stat(target_dir.joinpath(binary), self.max_test_launches, self.cpu)
             output_dict[binary.name.split(".")[0]] = data
         return output_dict
 

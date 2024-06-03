@@ -1,0 +1,9 @@
+{
+    "profiler": "perf",
+    "out_dir": "analyze",
+    "compiler": "riscv64-linux-gnu-gcc",
+    "events": "no_exclude.c",
+
+    "timeout": 10,
+    "max_test_launches": 50
+}

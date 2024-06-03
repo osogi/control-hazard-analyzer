@@ -189,7 +189,7 @@ class Summarize:
         return data
 
     def construct_plot(self, data: DataFrame, hovers: DataFrame) -> None:
-        ax = data.plot(kind="bar", rot=0)
+        ax = data.plot(kind="bar", rot=90)
 
         fig = ax.figure
         if fig is None:

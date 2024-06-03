@@ -28,7 +28,7 @@ class BaseAnalyzer:
 
         self.temp_dir: Path = Path(mkdtemp())
 
-    def __del__(self) -> None:
+    def fin(self) -> None:
         shutil.rmtree(self.temp_dir)
 
     def analyze(self, test_dir: Path) -> Dict[str, DictSI]:
